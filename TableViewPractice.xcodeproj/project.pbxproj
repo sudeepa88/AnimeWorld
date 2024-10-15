@@ -54,8 +54,7 @@
 		D9807E232CB7F33400DC640B = {
 			isa = PBXGroup;
 			children = (
-				D9C6B0F12CBEF3B3007ACF14 /* FavouritesVC.swift */,
-				D9C6B0EF2CBE9A81007ACF14 /* DetailsVC.swift */,
+				D9C6B0F72CBF0030007ACF14 /* Controllers */,
 				D9807E2E2CB7F33400DC640B /* TableViewPractice */,
 				D9807E2D2CB7F33400DC640B /* Products */,
 			);
@@ -102,6 +101,15 @@
 				D9C6B0ED2CBDBD6A007ACF14 /* AnimeMode.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D9C6B0F72CBF0030007ACF14 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D9C6B0EF2CBE9A81007ACF14 /* DetailsVC.swift */,
+				D9C6B0F12CBEF3B3007ACF14 /* FavouritesVC.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

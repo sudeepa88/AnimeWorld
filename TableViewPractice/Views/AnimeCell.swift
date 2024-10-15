@@ -34,13 +34,13 @@ class AnimeCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
     
     override func layoutSubviews() {
             super.layoutSubviews()
 
-            // Set the corner radius after the layout is complete
+            
             imgView.layer.cornerRadius = 10
         }
     
@@ -48,40 +48,58 @@ class AnimeCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        
+    }
+    
+    
+    func configureCell(imageName: String, titleAnime: String) {
+        self.imageName = imageName
+        self.titleAnime = titleAnime
+        animeLabel.text = titleAnime
+        updateFavButtonState()
+    }
+    
+    
+    private func updateFavButtonState() {
+        let defaults = UserDefaults.standard
+        let favoriteAnimes = defaults.array(forKey: "favoriteAnimes") as? [[String: String]] ?? []
+        
+        if favoriteAnimes.contains(where: { $0["titleAnime"] == self.titleAnime }) {
+            favImage.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            favImage.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+        }
     }
     
     
     @IBAction func tapOnFav(_ sender: Any) {
         let defaults = UserDefaults.standard
         
-        // Check if the favorite is already added or not
+        
         if favImage.backgroundImage(for: .normal) == UIImage(systemName: "heart") {
             favImage.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-            
-            // Retrieve current favorites from UserDefaults
+           
             var favoriteAnimes = defaults.array(forKey: "favoriteAnimes") as? [[String: String]] ?? []
-            
-            // Add the new favorite anime as a dictionary
+           
             let favoriteAnime: [String: String] = ["imageName": imageName, "titleAnime": titleAnime]
             favoriteAnimes.append(favoriteAnime)
             
-            // Save the updated array back to UserDefaults
+          
             defaults.set(favoriteAnimes, forKey: "favoriteAnimes")
             defaults.synchronize()
             
         } else {
             favImage.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
             
-            // Retrieve current favorites from UserDefaults
+            
             var favoriteAnimes = defaults.array(forKey: "favoriteAnimes") as? [[String: String]] ?? []
             
-            // Find and remove the anime from the favorites
+            
             if let index = favoriteAnimes.firstIndex(where: { $0["imageName"] == imageName && $0["titleAnime"] == titleAnime }) {
                 favoriteAnimes.remove(at: index)
             }
             
-            // Save the updated array back to UserDefaults
+            
             defaults.set(favoriteAnimes, forKey: "favoriteAnimes")
             defaults.synchronize()
         }

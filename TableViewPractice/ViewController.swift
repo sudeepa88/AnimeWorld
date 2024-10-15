@@ -52,17 +52,11 @@ class ViewController: UIViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let detailViewController = storyboard.instantiateViewController(withIdentifier: "FavouritesVC") as? FavouritesVC {
-            
-            
-            
-           
             navigationController?.pushViewController(detailViewController, animated: true)
         }
         
         
     }
-    
-    
     
 }
 
@@ -78,6 +72,9 @@ extension ViewController: UITableViewDataSource {
         
         cell.imageName = arr[indexPath.row].aimeImagNm
         cell.titleAnime = arr[indexPath.row].animeName
+        
+        cell.configureCell(imageName: arr[indexPath.row].aimeImagNm, titleAnime: arr[indexPath.row].animeName)
+        
         return cell
     }
     
